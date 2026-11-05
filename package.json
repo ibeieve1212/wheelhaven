@@ -1,0 +1,11 @@
+{
+  "name": "wheelhaven",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Hamster Pantry: an original crop strategy game powered by Squeekchain's accepted wheel passages.",
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "start": "node server.mjs"
+  }
+}
