@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#234b3b">
+  <meta name="description" content="Wheelhaven: Hamster Pantry, an original crop strategy game powered by Squeektoshi's real wheel passages. Grow carrots, broccoli and sunflower seeds. 仓鼠粮仓：给仓鼠种食材的 Squeekchain 小游戏。">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://api.squeekchain.com; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none';">
+  <title>Wheelhaven · 仓鼠粮仓</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.mjs"></script>
+</head>
+<body>
+  <a class="skip-link" href="#garden">跳到食材田 · Skip to food patch</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="Wheelhaven home"><span class="brand-mark"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 32V16" stroke="currentColor" stroke-width="2.5"/><path d="M20 23C5 25 7 10 7 10s15-2 13 13Zm0-6C20 3 35 7 35 7s1 14-15 10Z" fill="currentColor"/></svg></span><span>Wheelhaven<small data-i18n="brandSub">仓鼠粮仓 · 一小步，一篮好食材</small></span></a>
+    <nav aria-label="Main navigation"><button class="text-button" id="help-button" data-i18n="howTo">怎么玩</button><button class="text-button" id="evidence-button" data-i18n="liveNotes">真实数据</button><button class="language-button" id="language-button" aria-label="Switch language">EN</button></nav>
+  </header>
+  <main>
+    <section class="intro" aria-labelledby="intro-title">
+      <div class="intro-copy"><p class="eyebrow"><span class="tiny-flower">✳</span><span data-i18n="eyebrow">小小脚步，满满收获</span></p><h1 id="intro-title" data-i18n-html="title">把每一小步，<br>种成一篮<span>好食材。</span></h1><p class="intro-text" data-i18n="intro">种下胡萝卜、西兰花和向日葵，等仓鼠跑过下一圈。照料食材田，收获它喜欢的食物，一点点建好你的仓鼠粮仓。</p></div>
+      <div class="hamster-scene"><div id="hamster-art"></div><div class="hamster-note"><span class="status-dot" id="wheel-dot"></span><span id="wheel-caption">正在听听小轮子的动静…</span></div><span class="scene-caption" data-i18n="sceneCaption">一只真实的仓鼠 · 一点点真实的生长</span></div>
+    </section>
+
+    <section class="play-section" aria-labelledby="garden-title">
+      <div class="play-heading"><div><p class="eyebrow" data-i18n="chapter">YOUR LITTLE FOOD PATCH / 01</p><h2 id="garden-title" data-i18n="gardenTitle">今天，也给粮仓添一篮</h2></div></div>
+      <div id="mode-note" class="mode-note"></div>
+      <div class="game-layout">
+        <div class="garden-column">
+          <div class="garden-topbar"><div class="resources"><span class="resource" id="dew-resource"></span><span class="resource subtle" id="harvest-resource"></span></div><button class="harvest-button" id="harvest-all"></button></div>
+          <div class="garden-scene" id="garden" tabindex="-1" aria-label="Food patches">
+            <div class="garden-decoration decoration-pond"><svg viewBox="0 0 170 70" aria-hidden="true"><path d="M5 44C-7 16 44 8 68 16c28-19 68-9 68 5 43 9 35 38-5 38-40 21-111 11-126-15Z" fill="#B6D2C9"/><path d="M17 42c21-16 36-13 54-13m19 18 28-3" stroke="#DAE9DB" stroke-width="3" stroke-linecap="round"/><ellipse cx="58" cy="25" rx="11" ry="6" fill="#7FA587"/><path d="m58 25 8-4" stroke="#B6D2C9" stroke-width="2"/><circle cx="42" cy="45" r="4" fill="#E9DBA7"/></svg></div>
+            <div class="plot-grid" id="plots"></div>
+            <div class="garden-sign"><span>✳</span><span data-i18n="gardenSign">小小食材，慢慢长大</span></div>
+            <div class="garden-decoration decoration-grass"><svg viewBox="0 0 90 70" aria-hidden="true"><path d="M10 62 17 28l8 34m5 0 10-49 8 49m6 0 12-36 6 36" stroke="#76956B" stroke-width="4" stroke-linecap="round"/><circle cx="69" cy="22" r="7" fill="#E5BD64"/><circle cx="16" cy="23" r="5" fill="#E5BD64"/></svg></div>
+          </div>
+          <div class="garden-bottom"><span id="growth-explainer"></span><button class="text-button" id="save-button" data-i18n="saveGarden">保存与迁移 ↗</button></div>
+        </div>
+        <aside class="seed-tray" aria-labelledby="tray-title"><div class="tray-heading"><span class="eyebrow" data-i18n="seedTray">SEED TRAY</span><span class="tray-number">03</span></div><h3 id="tray-title" data-i18n="chooseSeed">先选一颗种子</h3><p class="tray-description" data-i18n="seedHint">再轻点一块空地，让故事开始。</p><div id="seed-options" role="group" aria-label="Seed selection"></div><div class="season-note" id="season-note"></div><button class="button rescue" id="rescue-button" hidden data-i18n="rescue">领一颗应急胡萝卜种子</button></aside>
+      </div>
+    </section>
+
+    <section class="restoration" aria-labelledby="restore-title"><div class="section-heading"><div><p class="eyebrow" data-i18n="nextChapter">下一小步</p><h2 id="restore-title" data-i18n="restoreTitle">让这片小天地，重新发光</h2></div><p id="goal-summary"></p></div><div class="buildings" id="buildings"></div></section>
+    <section class="journal" aria-labelledby="journal-title"><div><span class="eyebrow" data-i18n="fieldNotes">HARVEST NOTES</span><h2 id="journal-title" data-i18n="journalTitle">粮仓里的小事</h2></div><div id="journal-entries"></div></section>
+    <footer class="site-footer"><span>Wheelhaven <span class="footer-star">✳</span> <span data-i18n="footer">给仓鼠种食材的 Squeekchain 小游戏。</span></span><div><a href="https://sepolia.squeekchain.com/" target="_blank" rel="noopener" data-i18n="official">认识 Squeektoshi ↗</a><button class="text-button" id="footer-evidence-button" data-i18n="liveNotes">真实数据</button><button class="text-button" id="about-button" data-i18n="about">关于作品</button></div></footer>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <dialog id="plot-dialog" aria-labelledby="plot-dialog-title"><div id="plot-dialog-body"></div></dialog>
+  <dialog id="info-dialog" aria-labelledby="info-title"><div id="info-dialog-body"></div></dialog>
+  <noscript><p class="noscript">请启用 JavaScript 以试玩仓鼠粮仓。JavaScript is needed to play Hamster Pantry.</p></noscript>
+</body>
+</html>
